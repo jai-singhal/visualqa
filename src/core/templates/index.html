@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+{% comment %} <div class="container">
+    <h1>Visual Question Answering</h1>
+    <p>Bootstrap is the most popular HTML, CSS...</p>
+</div> {% endcomment %}
+
+<div class="container">
+
+    <h2>Visual Question Answering</h2>
+    <p class="lead"><b>Upload any Image and get your queries answered</b></p>
+    <!-- Upload  -->
+    <form class="uploader" id="file-upload-form" method="POST" novalidate="" enctype="multipart/form-data">
+        {% csrf_token %}
+
+
+        <label for="id_image" id="file-drag">
+            <img id="file-image" src="#" alt="Preview" class="hidden">
+            <div id="start">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <div>Select a image file or drag here</div>
+                <div id="notimage" class="hidden">Please select an image</div>
+                <span id="file-upload-btn" class="btn btn-primary">Select a image file</span>
+            </div>
+            <div id="response" class="hidden">
+                <div id="messages"></div>
+                <progress class="progress" id="file-progress" value="0">
+                    <span>0</span>%
+                </progress>
+            </div>
+        </label>
+
+        {{form}}
+
+    </form>
+
+
+    <div id="question_area" class=" center-block" style="margin:0 auto;">
+        <form id="questionForm">{% csrf_token %}
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="question" name="question">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit" id="ask_question"
+                            data-loading-text="<span class='glyphicon glyphicon-refresh glyphicon-spin'></span> Processing">
+                            Ask!</button>
+                    </span>
+                </div>
+
+            </div>
+    </div>
+    </form>
+    <div id="answer_area"></div>
+
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/index.js' %}"></script>
+
+{% endblock %}
