@@ -13,7 +13,7 @@ Download it from
 
 ## Demo GIF
 
-[Demo video](https://github.com/jai-singhal/visualqa/blob/master/demo.gif)
+![Demo video](https://github.com/jai-singhal/visualqa/blob/master/demo.gif)
 
 ## Installation guide
 
