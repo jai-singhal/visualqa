@@ -48,6 +48,7 @@ Download it from
     `
     python3 -m spacy download en-core-web-sm==2.0.0
     `
+
     `
     python3 -m spacy download en-vectors-web-lg==2.1.0
     `
@@ -56,3 +57,4 @@ Download it from
 
     `
     python3 manage.py runserver
+    `
