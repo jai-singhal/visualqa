@@ -86,7 +86,7 @@ class MyVQAModel():
             return question_tensor
         return None
 
-
+    
     def run(self, image_filepath = None, question = None, question_no = 1):
         import time
         c1= time.time()
