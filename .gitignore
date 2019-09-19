@@ -139,3 +139,4 @@ logs/*
 
 # DATASET
 vgg16_weights.h5
+media_cdn/
