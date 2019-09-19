@@ -1,0 +1,3 @@
+en-core-web-sm==2.0.0
+en-vectors-web-lg==2.1.0
+# python3 -m spacy download <pkg_name>

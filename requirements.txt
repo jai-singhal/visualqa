@@ -5,8 +5,6 @@ certifi==2019.9.11
 chardet==3.0.4
 cymem==2.0.2
 Django==2.2.5
-en-core-web-sm==2.0.0
-en-vectors-web-lg==2.1.0
 gast==0.3.2
 google-pasta==0.1.7
 grpcio==1.23.0
