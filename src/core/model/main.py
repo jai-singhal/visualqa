@@ -33,6 +33,8 @@ class MyVQAModel():
         self.VQA_weights_file_name   =  os.path.join(DATASET_PATH, "VQA_MODEL_WEIGHTS.hdf5")
         self.label_encoder_file_name = os.path.join(DATASET_PATH, "FULL_labelencoder_trainval.pkl")
         self.CNN_weights_file_name   = os.path.join(DATASET_PATH, "vgg16_weights.h5")
+        self.word_embeddings = None
+        self.image_features = None
 
     def get_image_model(self):
         image_model = VGG_16(self.CNN_weights_file_name)
@@ -66,21 +68,45 @@ class MyVQAModel():
         return vqa_model
 
 
-    def get_question_features(self, question):
-        word_embeddings = spacy.load('en_vectors_web_lg')
-        tokens = word_embeddings(question)
-        question_tensor = np.zeros((1, 30, 300))
-        for j in range(len(tokens)):
+    def get_question_features(self, question, question_no):
+        import time
+        c1= time.time()
+        if question_no == 1:
+            word_embeddings = spacy.load('en_vectors_web_lg')
+            self.word_embeddings = word_embeddings
+
+        c2= time.time()
+        print("Time taken in loading word embeddings", c2-c1, "sec")
+
+        if self.word_embeddings:
+            tokens = self.word_embeddings(question)
+            question_tensor = np.zeros((1, 30, 300))
+            for j in range(len(tokens)):
                 question_tensor[0,j,:] = tokens[j].vector
-        return question_tensor
+            return question_tensor
+        return None
 
 
-    def run(self, image_filepath = None, question = None):
-        image_features = self.get_image_features(image_filepath)
-        question_features = self.get_question_features(question)
+    def run(self, image_filepath = None, question = None, question_no = 1):
+        import time
+        c1= time.time()
+
+        if question_no == 1:
+            image_features = self.get_image_features(image_filepath)
+            self.image_features = image_features
+            
+        c2= time.time()
+        print("Time taken image features", c2-c1, "sec")
+
+        question_features = self.get_question_features(question, question_no)
+        c1= time.time()
+        print("Time taken question features", c1-c2, "sec")
+
         vqa_model = self.get_VQA_model()
+        c2= time.time()
+        print("Time taken load vqa model", c2-c1, "sec")
 
-        y_output = vqa_model.predict([question_features, image_features])
+        y_output = vqa_model.predict([question_features, self.image_features])
         y_sort_index = np.argsort(y_output)
 
         labelencoder = joblib.load(self.label_encoder_file_name)

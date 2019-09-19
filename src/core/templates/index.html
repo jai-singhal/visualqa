@@ -8,10 +8,6 @@
 
 {% block content %}
 
-{% comment %} <div class="container">
-    <h1>Visual Question Answering</h1>
-    <p>Bootstrap is the most popular HTML, CSS...</p>
-</div> {% endcomment %}
 
 <div class="container">
 
@@ -20,8 +16,6 @@
     <!-- Upload  -->
     <form class="uploader" id="file-upload-form" method="POST" novalidate="" enctype="multipart/form-data">
         {% csrf_token %}
-
-
         <label for="id_image" id="file-drag">
             <img id="file-image" src="#" alt="Preview" class="hidden">
             <div id="start">
@@ -47,7 +41,9 @@
         <form id="questionForm">{% csrf_token %}
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" class="form-control" id="question" name="question">
+                    <input type="text" class="form-control" id="question"
+                     placeholder = "Enter your question here"
+                     name="question">
                     <input type="hidden" class="form-control" id="image_id" name="image_id">
 
                     <span class="input-group-btn">
@@ -56,12 +52,11 @@
                             Ask!</button>
                     </span>
                 </div>
-
+                <p class = "mute">First question result usually takes time</p>
             </div>
+        </form>
     </div>
-    </form>
     <div id="answer_area"></div>
-
 </div>
 
 
