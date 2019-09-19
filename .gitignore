@@ -138,4 +138,4 @@ logs/*
 *.bat
 
 # DATASET
-dataset/
+vgg16_weights.h5
