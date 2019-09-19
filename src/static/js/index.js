@@ -13,7 +13,9 @@ function readURL(input) {
     }
   }
   $("#question_area").hide();
-  
+
+var currentImageId = "";
+
 $("#id_image").change(function() {
     readURL(this);
 
@@ -26,9 +28,10 @@ $("#id_image").change(function() {
         type: 'POST',
         data: formData,
         success: function (response) {
-            console.log(response)
-            $("#question_area").show()
-
+            console.log(response);
+            $("#question_area").show();
+            currentImageId = response["image_id"];
+            $("#image_id").val(currentImageId);
         },
         cache: false,
         contentType: false,
@@ -38,9 +41,14 @@ $("#id_image").change(function() {
   });
 
   $("#questionForm").submit(function(e){
+    if( $("#question").val().length === 0 ){
+      alert("No question asked");
+      return false;
+    }
     e.preventDefault()
     $form = $(this)
     var formData = new FormData(this);
+    // formData.append('image_id', currentImageId);
     
     console.log(formData)
     $("#question").prop("disabled", true);
@@ -59,6 +67,9 @@ $("#id_image").change(function() {
              with confidence of ${answers[0]["prediction"]}</p>
              `);
             
+        },
+        error: function(response){
+          alert("Something went wrong");
         },
         cache: false,
         contentType: false,

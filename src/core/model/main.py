@@ -11,6 +11,8 @@ from sklearn.externals import joblib
 from core.model.vqa import VQA_MODEL
 from core.model.cnn import VGG_16
 import warnings
+from django.conf import settings
+
 
 class MyVQAModel():
     def __init__(self):
@@ -25,8 +27,8 @@ class MyVQAModel():
         K.set_image_data_format('channels_first')
         K.common.image_dim_ordering()
 
-        BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        MODEL_PATH = os.path.join(BASE_DIR, 'model')
+        self.BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        MODEL_PATH = os.path.join(self.BASE_DIR, 'model')
         DATASET_PATH = os.path.join(MODEL_PATH, "dataset")
         self.VQA_weights_file_name   =  os.path.join(DATASET_PATH, "VQA_MODEL_WEIGHTS.hdf5")
         self.label_encoder_file_name = os.path.join(DATASET_PATH, "FULL_labelencoder_trainval.pkl")
@@ -38,9 +40,12 @@ class MyVQAModel():
         image_model.compile(optimizer=sgd, loss='categorical_crossentropy')
         return image_model
 
-    def get_image_features(self, image):
+    def get_image_features(self, fileimage_path):
         image_features = np.zeros((1, 4096))
-        im = cv2.resize(image, (224, 224))
+        image_file_path = "/".join(fileimage_path.split("/")[2:])
+        media_path = os.path.join(settings.MEDIA_ROOT, image_file_path)
+
+        im = cv2.resize(cv2.imread(media_path), (224, 224))
         mean_pixel = [103.939, 116.779, 123.68]
         im = im.astype(np.float32, copy=False)
         for c in range(3):
