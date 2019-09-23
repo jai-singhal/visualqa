@@ -2,7 +2,7 @@
 
 Check out official webiste of [VisualQA](https://visualqa.org/)
 
-Download it from
+Download the weight matrix of the 16 layer CNN model.
 [vgg16_weights.h5](https://drive.google.com/file/d/0Bz7KyqmuGsilT0J5dmRCM0ROVHc/view)
  and put in src/model/dataset folder. Unable to put it here because of huge size :P
 
