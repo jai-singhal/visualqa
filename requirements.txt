@@ -16,7 +16,7 @@ Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.0
 Markdown==3.1.1
 murmurhash==1.0.2
-numpy==1.17.2
+numpy==1.22.0
 opencv-python==4.1.1.26
 plac==0.9.6
 preshed==2.0.1
