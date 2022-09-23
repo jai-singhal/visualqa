@@ -20,7 +20,7 @@ numpy==1.17.2
 opencv-python==4.1.1.26
 plac==0.9.6
 preshed==2.0.1
-protobuf==3.9.1
+protobuf==3.18.3
 pytz==2019.2
 PyYAML==5.1.2
 requests==2.22.0
